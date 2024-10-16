@@ -12,10 +12,13 @@ include_directories( ${OPENGL_INCLUDE_DIRS})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_executable(2Dengine
-                src/main.cpp) 
+                src/main.cpp
+                src/engine.cpp
+                src/shader_manager.cpp
+                src/glad.c) 
 
 if(UNIX AND NOT APPLE)
   target_link_libraries(2Dengine OpenGL::GL glfw)
 elseif(WIN32)
-  target_link_libraries(2Dengine ${CMAKE_SOURCE_DIR}/lib/glfw3dll.lib OpenGL::GL glfw)
+  target_link_libraries(2Dengine ${CMAKE_SOURCE_DIR}/lib/glfw3dll.lib ${OPENGL_LIBRARIES})
 endif()
