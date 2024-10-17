@@ -15,6 +15,8 @@ add_executable(2Dengine
                 src/main.cpp
                 src/engine.cpp
                 src/shader_manager.cpp
+                src/vertex_buffer.cpp
+                src/index_buffer.cpp
                 src/glad.c) 
 
 if(UNIX AND NOT APPLE)
