@@ -17,6 +17,7 @@ public:
 public:
   Engine();
   void RunEngine();
+  void Output(int Key);
 
 private:
   void WindowInit();

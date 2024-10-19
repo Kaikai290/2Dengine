@@ -2,6 +2,7 @@
 
 #include "vertex_buffer.h"
 #include "index_buffer.h"
+#include "callback_function.h"
 
 Engine::Engine(){
   WindowInit();
@@ -17,6 +18,8 @@ void Engine::WindowInit()
   {
     std::cout << "Failed to initialize GLAD" << std::endl;
   }
+  CallbackFunction Input(*this); 
+  glfwSetWindowUserPointer (Window, &Input);
 }
 
 void Engine::ShaderInit(){
@@ -50,6 +53,9 @@ void Engine::ShaderInit(){
   glBindVertexArray(0); 
 }
 
+void Engine::Output(int Key){
+  std::cout << Key << std::endl;
+}
 void Engine::RunEngine()
 {
   while (!glfwWindowShouldClose(Window)){
