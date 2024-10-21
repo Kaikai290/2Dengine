@@ -1,5 +1,5 @@
-#ifndef ENGINE
-#define ENGINE
+#ifndef ENGINE_H
+#define ENGINE_H
 
 #include "../include/glad/glad.h"
 #include "../include/GLFW/glfw3.h"
@@ -7,12 +7,13 @@
 #include <iostream>
 
 #include "shader_manager.h"
+#include "vertex_array.h"
 
 class Engine{
 public:
   GLFWwindow* Window;
-  unsigned int VBO, VAO, EBO;
   ShaderManager ShaderProgram;
+  VertexArray VertexArray;
 
 public:
   Engine();

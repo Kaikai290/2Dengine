@@ -1,5 +1,6 @@
 #include "engine.h"
 
+#include "vertex_array.h"
 #include "vertex_buffer.h"
 #include "index_buffer.h"
 #include "callback_function.h"
@@ -27,35 +28,16 @@ void Engine::ShaderInit(){
   ShaderProgram.CreateShader();
 
 
-  // set up vertex data (and buffer(s)) and configure vertex attributes
-  // ------------------------------------------------------------------
-  float vertices[] = {
-    0.5f,  0.5f, 0.0f,  // top right
-    0.5f, -0.5f, 0.0f,  // bottom right
-    -0.5f, -0.5f, 0.0f,  // bottom left
-    -0.5f,  0.5f, 0.0f   // top left 
-  };
-  unsigned int indices[] = {  // note that we start from 0!
-    0, 1, 3,  // first Triangle
-    1, 2, 3   // second Triangle
-  };
+  unsigned int id = 1;
+  class VertexArray temp(id);
+  VertexArray = temp;
 
-  glGenVertexArrays(1, &VAO);
-
-  glBindVertexArray(VAO);
-
-  VertexBuffer vb(vertices, sizeof(vertices));
-  IndexBuffer ib( indices, 6);
-
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-  glEnableVertexAttribArray(0);
-
-  glBindVertexArray(0); 
 }
 
 void Engine::Output(int Key){
   std::cout << Key << std::endl;
 }
+
 void Engine::RunEngine()
 {
   while (!glfwWindowShouldClose(Window)){
@@ -64,13 +46,10 @@ void Engine::RunEngine()
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // draw our first triangle
     glUseProgram(ShaderProgram.ShaderProgram);
-    glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-    //glDrawArrays(GL_TRIANGLES, 0, 6);
+    VertexArray.Bind();
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-    // glBindVertexArray(0); // no need to unbind it every time 
-
+    VertexArray.Unbind();
     // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
     // -------------------------------------------------------------------------------
     glfwSwapBuffers(Window);

@@ -16,6 +16,7 @@ add_executable(2Dengine
                 src/engine.cpp
                 src/shader_manager.cpp
                 src/vertex_buffer.cpp
+                src/vertex_array.cpp
                 src/index_buffer.cpp
                 src/callback_function.cpp
                 src/glad.c) 
