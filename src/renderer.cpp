@@ -12,4 +12,12 @@ void Renderer::RendererInit(){
   VAO = temp;
 }
 
+void Renderer::BindVAO(){
+  VAO.Bind();
+}
+
+void Renderer::UnbindVAO(){
+  VAO.Unbind();
+}
+
 VertexArray Renderer::GetVAO()  {return VAO.Index;}

@@ -1,13 +1,10 @@
 #include "engine.h"
 
-#include "vertex_array.h"
-#include "vertex_buffer.h"
-#include "index_buffer.h"
 #include "callback_function.h"
 
 Engine::Engine(){
   WindowInit();
-  ShaderInit();
+  RendererInit();
 }
 
 void Engine::WindowInit()
@@ -23,15 +20,8 @@ void Engine::WindowInit()
   glfwSetWindowUserPointer (Window, &Input);
 }
 
-void Engine::ShaderInit(){
-  // build and compile our shader program
-  ShaderProgram.CreateShader();
-
-
-  unsigned int id = 1;
-  class VertexArray temp(id);
-  VertexArray = temp;
-
+void Engine::RendererInit(){
+ GameRenderer.RendererInit(); 
 }
 
 void Engine::Output(int Key){
@@ -41,17 +31,15 @@ void Engine::Output(int Key){
 void Engine::RunEngine()
 {
   while (!glfwWindowShouldClose(Window)){
-    // render
-    // ------
+
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glUseProgram(ShaderProgram.ShaderProgram);
-    VertexArray.Bind();
+    glUseProgram(GameRenderer.ShaderProgram.ShaderProgram);
+    GameRenderer.BindVAO();
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-    VertexArray.Unbind();
-    // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
-    // -------------------------------------------------------------------------------
+    GameRenderer.UnbindVAO();
+
     glfwSwapBuffers(Window);
     glfwPollEvents();  }
 }

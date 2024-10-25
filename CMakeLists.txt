@@ -14,6 +14,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 add_executable(2Dengine
                 src/main.cpp
                 src/engine.cpp
+                src/renderer.cpp
                 src/shader_manager.cpp
                 src/vertex_buffer.cpp
                 src/vertex_array.cpp

@@ -13,8 +13,6 @@
 class Engine{
 public:
   GLFWwindow* Window;
-  ShaderManager ShaderProgram;
-  VertexArray VertexArray;
   Renderer GameRenderer;
 
 public:
@@ -25,5 +23,6 @@ public:
 private:
   void WindowInit();
   void ShaderInit();
+  void RendererInit();
 };
 #endif

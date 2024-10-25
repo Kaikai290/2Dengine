@@ -12,6 +12,9 @@ public:
   Renderer();
 
   void RendererInit();
+  void BindVAO();
+  void UnbindVAO();
+
   VertexArray GetVAO();
 };
 
