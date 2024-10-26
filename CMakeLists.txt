@@ -14,11 +14,11 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 add_executable(2Dengine
                 src/main.cpp
                 src/engine.cpp
-                src/renderer.cpp
-                src/shader_manager.cpp
-                src/vertex_buffer.cpp
-                src/vertex_array.cpp
-                src/index_buffer.cpp
+                src/render/renderer.cpp
+                src/render/shader_manager.cpp
+                src/render/vertex_buffer.cpp
+                src/render/vertex_array.cpp
+                src/render/index_buffer.cpp
                 src/callback_function.cpp
                 src/glad.c) 
 

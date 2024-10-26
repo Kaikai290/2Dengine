@@ -1,5 +1,5 @@
 #include "vertex_array.h"
-#include "engine.h"
+#include "../engine.h"
 
 
 static float vertices[] = {

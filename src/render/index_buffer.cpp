@@ -1,5 +1,5 @@
 #include "index_buffer.h"
-#include "engine.h"
+#include "../engine.h"
 
 IndexBuffer::IndexBuffer(const unsigned int* data, unsigned int count)
     : Count(count)

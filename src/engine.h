@@ -6,14 +6,16 @@
 
 #include <iostream>
 
-#include "shader_manager.h"
-#include "vertex_array.h"
-#include "renderer.h"
+#include "render/shader_manager.h"
+#include "render/vertex_array.h"
+#include "render/renderer.h"
+#include "memory.h"
 
 class Engine{
 public:
   GLFWwindow* Window;
   Renderer GameRenderer;
+  Memory test; 
 
 public:
   Engine();
@@ -25,4 +27,5 @@ private:
   void ShaderInit();
   void RendererInit();
 };
+
 #endif
