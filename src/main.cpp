@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+#include "callback_function.h"
 #include "engine.h"
 
 void RunEngine();
@@ -28,6 +29,9 @@ int main(void)
 
 void RunEngine(){
 
-  Engine Engine;
-  Engine.RunEngine();
+  Engine cEngine;
+  CallbackFunction Input(cEngine);
+  glfwSetWindowUserPointer(cEngine.Window, &Input);
+  std::cout << cEngine.Level.Level << std::endl;
+  cEngine.RunEngine();
 }

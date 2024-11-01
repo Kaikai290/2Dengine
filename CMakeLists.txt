@@ -15,6 +15,7 @@ add_executable(2Dengine
                 src/main.cpp
                 src/engine.cpp
                 src/entity.cpp
+                src/world.cpp
                 src/render/renderer.cpp
                 src/render/shader_manager.cpp
                 src/render/vertex_buffer.cpp

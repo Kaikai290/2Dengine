@@ -15,6 +15,7 @@
 #include "render/vertex_array.h"
 #include "render/renderer.h"
 #include "memory.h"
+#include "world.h"
 
 class Engine{
 public:
@@ -25,11 +26,13 @@ public:
   Memory test; 
   Entity GameEntity;
   glm::mat4 model = glm::mat4(1.0f);
+  World Level;
 
 public:
   Engine();
   void RunEngine();
   void Output(int Key);
+  void InputInit(Engine p_Engine);
 
 private:
   void WindowInit();

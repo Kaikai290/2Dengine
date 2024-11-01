@@ -35,7 +35,7 @@ ShaderSource ShaderManager::LoadShadersFromFiles(std::string VertexShaderFilePat
 
 void ShaderManager::CreateShader()
 {
-  ShaderSource ShaderFiles = LoadShadersFromFiles("W:/2Dengine/res/shaders/shader.vs", "W:/2Dengine/res/shaders/shader.fs");
+  ShaderSource ShaderFiles = LoadShadersFromFiles("W:/2Dengine/res/shaders/shader.vs", "W:/2Dengine/res/shaders/shader.fs"); //Change this from absolute paths
 
   unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
 

@@ -7,7 +7,6 @@ CallbackFunction::CallbackFunction(Engine& Engine)
 }
 
  void CallbackFunction::key_callback(GLFWwindow *window, int key, int scancode, int action, int mods){
-  CallbackFunction* state = (CallbackFunction *)glfwGetWindowUserPointer(window);
-  state->mEngine.Output(key);
-  //state->mEngine.Inputs();
+  CallbackFunction* state = static_cast<CallbackFunction*>(glfwGetWindowUserPointer(window));
+  state->mEngine.Output(key);  //state->mEngine.Inputs();
 }
