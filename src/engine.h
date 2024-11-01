@@ -32,7 +32,7 @@ public:
   Engine();
   void RunEngine();
   void Output(int Key);
-  void InputInit(Engine p_Engine);
+  void InputInit(Engine p_Engine); // Delete this function
 
 private:
   void WindowInit();

@@ -29,7 +29,9 @@ int main(void)
 
 void RunEngine(){
 
-  Engine cEngine;
+  Engine cEngine;   
+  glViewport(0, 0, cEngine.Width, cEngine.Height);
+
   CallbackFunction Input(cEngine);
   glfwSetWindowUserPointer(cEngine.Window, &Input);
   std::cout << cEngine.Level.Level << std::endl;
