@@ -20,8 +20,8 @@
 class Engine{
 public:
   GLFWwindow* Window;
-  unsigned int Height = 640;
-  unsigned int Width = 480;
+  unsigned int Height = 480;
+  unsigned int Width = 640;
   Renderer GameRenderer;
   Memory test; 
   Entity GameEntity;
@@ -38,6 +38,7 @@ private:
   void WindowInit();
   void RendererInit();
   void EntityInit();
+  void WorldInit();
 };
 
 #endif

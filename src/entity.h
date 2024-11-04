@@ -12,6 +12,7 @@ class Entity{
 public:
   glm::vec3 Position;
   glm::vec3 Velocity;
+  glm::vec4 Colour = glm::vec4(0.2f, 0.6f, 0.1f, 0.1f);
 
   glm::vec3 Size = glm::vec3(40.0f, 40.0f, 1.0f);
   Renderer* EntityRenderer;

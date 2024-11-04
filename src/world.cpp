@@ -1,37 +1,85 @@
 #include "world.h"
 
 #include <fstream>
-#include <sstream>
 
-World::World(){
+World::World() {}
+
+World::World(Renderer *WorldRenderer, unsigned int Width, unsigned int Height)
+    : Height(Height), Width(Width) {
+  for(int i =0; i < 1024; i++) {
+    LevelTiles[i].P_TileRenderer = WorldRenderer;
+  }
   LoadWorld("W:/2Dengine/res/level/world.lvl");
 }
 
-World::World(Renderer *WorldRenderer, unsigned int Height, unsigned int Width)
-  : Height(Height), Width(Width) {
-  LoadWorld("W:/2Dengine/res/level/world.lvl");
-  P_WorldRenderer = WorldRenderer;
-}
+World::~World() {}
 
-World::~World(){
-}
-
-void World::LoadWorld(std::string FilePath){
+void World::LoadWorld(std::string FilePath) {
   int i = 0;
+  int XPos = 0;
+  int YPos = 0;
 
   std::ifstream WorldLevel(FilePath);
-  if(!WorldLevel.is_open()){
-    std::cout << "Failed to open World Level file" << std::endl;
+  char c = '\n';
+
+  while(WorldLevel.get((char) c)) {
+    std::cout << i<< std::endl;
+    if(i > (sizeof(LevelTiles)/sizeof(*LevelTiles))) {
+       std::cout << "Level is greater then max tiles allowed" << std::endl;
+       return;
+    }
+    switch (c) {
+      case '0':
+        LevelTiles[i].Type = UNWALKABLE;
+        LevelTiles[i].WorldPosition.x = (float)XPos * TileSize;
+        LevelTiles[i].WorldPosition.y = (float)YPos * TileSize;
+        LevelTiles[i].Initalized = true;
+        i++;
+        XPos++;
+        break;
+      case '1': 
+        LevelTiles[i].Type = WALKABLE;
+        LevelTiles[i].WorldPosition.x = (float)XPos * TileSize;
+        LevelTiles[i].WorldPosition.y = (float)YPos * TileSize;
+        LevelTiles[i].Initalized = true;
+        i++;
+        XPos++;
+        break;
+      case '2':
+        LevelTiles[i].Type = DOORWAY;
+        LevelTiles[i].WorldPosition.x = (float)XPos * TileSize;
+        LevelTiles[i].WorldPosition.y = (float)YPos * TileSize;
+        LevelTiles[i].Initalized = true;
+        i++;
+        XPos++;
+        break;
+      case '3':
+        LevelTiles[i].Type = SPAWN;
+        LevelTiles[i].WorldPosition.x = (float)XPos * TileSize;
+        LevelTiles[i].WorldPosition.y = (float)YPos * TileSize;
+        LevelTiles[i].Initalized = true;
+        i++;
+        XPos++;
+        break;
+      case '\n':
+        Level += c;
+        XPos = 0;
+        YPos++;
+        break;
+    }
   }
-
-  std::stringstream WorldLevelStream;
-  WorldLevelStream << WorldLevel.rdbuf();
-  
-  Level = WorldLevelStream.str();
-
-  WorldLevel.close();
 }
 
-void World::RenderWorld(){
 
+void World::RenderWorld() {
+  for(int i =0; i < 1024; i++) {
+    if(LevelTiles[i].Initalized == true){
+      LevelTiles[i].RenderTile();
+    }
+    else {break;}
+  }
+}
+
+void World::RenderTile() {
+  return;
 }

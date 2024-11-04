@@ -25,7 +25,7 @@ public:
 
   void SetMatrix4(const char* UniformName, glm::mat4 UniformData);
 
-  void SetVector4(const char* UniformName, glm::mat4 UniformData);
+  void SetVector4(const char* UniformName, glm::vec4 UniformData);
 
 
   unsigned int GetShaderID(); 
