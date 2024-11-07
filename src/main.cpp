@@ -34,6 +34,5 @@ void RunEngine(){
 
   CallbackFunction Input(cEngine);
   glfwSetWindowUserPointer(cEngine.Window, &Input);
-  std::cout << cEngine.Level.Level << std::endl;
   cEngine.RunEngine();
 }

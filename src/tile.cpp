@@ -3,10 +3,6 @@
 Tile::Tile(){
 }
 
-Tile::Tile(Renderer *TileRenderer)
-  : P_TileRenderer(TileRenderer) {
-}
-
 void Tile::RenderTile() {
   P_TileRenderer->BindShader();
   P_TileRenderer->BindVAO();
@@ -29,8 +25,12 @@ void Tile::RenderTile() {
   P_TileRenderer->SetMatrix4("View", view);
   P_TileRenderer->SetMatrix4("Projection", projection);
   P_TileRenderer->SetVector4("Colour", glm::vec4(WorldPosition.x / 640.0f, WorldPosition.y / 480.0f, /*(WorldPosition.x * WorldPosition.y) / (640.0f * 480.0f)*/ 0.8f, 1.0f));
-
+  Texture.UseSprite();
   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
   P_TileRenderer->UnbindVAO();
+}
+
+void Tile::LoadSprite(const char* FilePath) {
+  Texture.LoadSprite(FilePath);
 }

@@ -3,15 +3,17 @@
 
 #include<iostream>
 
+#include "render/sprite_manager.h"
 #include "tile.h"
 
 class World{
 public:
-  std::string Level;
   Tile LevelTiles[1024]; //May increase the number of tiles not sure what a good amount would be
   unsigned int Height;
   unsigned int Width;
   unsigned int TileSize = 40;
+
+  SpriteManager Texture;
 
 public: 
   World();
@@ -20,7 +22,8 @@ public:
 
   void LoadWorld(std::string FilePath);
   void RenderWorld();
-  void RenderTile();
+  void LoadSprites();
+  void BindSpritesToTiles();
 };
 
 #endif

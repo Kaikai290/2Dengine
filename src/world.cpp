@@ -10,6 +10,8 @@ World::World(Renderer *WorldRenderer, unsigned int Width, unsigned int Height)
     LevelTiles[i].P_TileRenderer = WorldRenderer;
   }
   LoadWorld("W:/2Dengine/res/level/world.lvl");
+  LoadSprites();
+  BindSpritesToTiles();
 }
 
 World::~World() {}
@@ -20,10 +22,9 @@ void World::LoadWorld(std::string FilePath) {
   int YPos = 0;
 
   std::ifstream WorldLevel(FilePath);
-  char c = '\n';
+  char c;
 
   while(WorldLevel.get((char) c)) {
-    std::cout << i<< std::endl;
     if(i > (sizeof(LevelTiles)/sizeof(*LevelTiles))) {
        std::cout << "Level is greater then max tiles allowed" << std::endl;
        return;
@@ -62,7 +63,6 @@ void World::LoadWorld(std::string FilePath) {
         XPos++;
         break;
       case '\n':
-        Level += c;
         XPos = 0;
         YPos++;
         break;
@@ -80,6 +80,17 @@ void World::RenderWorld() {
   }
 }
 
-void World::RenderTile() {
-  return;
+
+void World::LoadSprites() {
+  Texture.LoadSprite("C:/Users/kaiwi/OneDrive/Desktop/Photos/Tile.jpg");
 }
+
+void World::BindSpritesToTiles() {
+  for(int i = 0; i < 1024; i++) {
+    if(LevelTiles[i].Initalized == true){
+      LevelTiles[i].Texture = Texture;
+    }
+    else {break;}
+  }
+}
+

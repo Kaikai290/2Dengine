@@ -6,6 +6,7 @@
 #include "../include/glm/gtc/type_ptr.hpp"
 
 #include "render/renderer.h"
+#include "render/sprite_manager.h"
 
 enum TILETYPE{ 
   UNWALKABLE, // 0 is tiles player can not step on
@@ -22,11 +23,14 @@ public:
   glm::vec3 Size = glm::vec3(40.0f, 40.0f, 1.0f);
   bool Initalized = false; 
 
+  SpriteManager Texture;
+
 public:
   Tile();
   Tile(Renderer *TileRenderer);
 
   void RenderTile();
+  void LoadSprite(const char* FilePath);
 };
 
 #endif

@@ -7,6 +7,7 @@
 
 #include "math/vector3.h"
 #include "render/renderer.h"
+#include "render/sprite_manager.h"
 
 class Entity{
 public:
@@ -14,8 +15,9 @@ public:
   glm::vec3 Velocity;
   glm::vec4 Colour = glm::vec4(0.2f, 0.6f, 0.1f, 0.1f);
 
-  glm::vec3 Size = glm::vec3(40.0f, 40.0f, 1.0f);
+  glm::vec3 Size = glm::vec3(40.0f * 4.f, 40.0f*4.f, 1.0f);
   Renderer* EntityRenderer;
+  SpriteManager Texture;
 
 public:
   Entity();

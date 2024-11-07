@@ -17,12 +17,17 @@ add_executable(2Dengine
                 src/entity.cpp
                 src/world.cpp
                 src/tile.cpp
+
                 src/render/renderer.cpp
                 src/render/shader_manager.cpp
                 src/render/vertex_buffer.cpp
                 src/render/vertex_array.cpp
                 src/render/index_buffer.cpp
+                src/render/sprite_manager.cpp
+                src/render/stb_image.cpp
+
                 src/math/vector4.cpp
+
                 src/callback_function.cpp
                 src/glad.c) 
 
