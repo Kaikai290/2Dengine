@@ -1,10 +1,11 @@
 #include "sprite_manager.h"
 
-SpriteManager::SpriteManager(){
+SpriteManager::SpriteManager() : ID(), Width(), Height(), nrChannels() {
 };
 
 
 void SpriteManager::LoadSprite(const char* FilePath){ 
+  glBindTexture(GL_TEXTURE_2D, 0);
   glGenTextures(1, &ID);
   glBindTexture(GL_TEXTURE_2D, ID); 
   // set the texture wrapping parameters

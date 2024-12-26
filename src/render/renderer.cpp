@@ -25,6 +25,14 @@ void Renderer::BindShader(){
   ShaderProgram.UseShader();
 }
 
+void Renderer::LoadSprite(const char* sprite) {
+  Texture.LoadSprite(sprite);
+}
+
+void Renderer::UseSprite() {
+  Texture.UseSprite();
+}
+
 void Renderer::SetMatrix4(const char* UniformName, glm::mat4 UniformData){
   glUniformMatrix4fv(glGetUniformLocation(this->GetShaderID(), UniformName), 1, GL_FALSE, (const GLfloat *)glm::value_ptr(UniformData));
 }

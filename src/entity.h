@@ -24,6 +24,8 @@ public:
   Entity(Renderer* EntityRenderer);
   Entity(Renderer* EntityRenderer, Vector3 Position, Vector3 Velocity);
 
+  void LoadSprite(const char* FilePath);
+  void ApplyRenderer(Renderer* Renderer);
   void Render();
 }; 
 #endif

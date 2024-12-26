@@ -9,12 +9,15 @@
 #include "../../include/glm/gtc/type_ptr.hpp"
 
 #include "shader_manager.h"
+#include "sprite_manager.h"
 #include "vertex_array.h"
 
 class Renderer{
 public:
   ShaderManager ShaderProgram;
   VertexArray VAO;
+  SpriteManager Texture;
+
 public:
   Renderer();
 
@@ -22,6 +25,8 @@ public:
   void BindVAO();
   void UnbindVAO();
   void BindShader();
+  void LoadSprite(const char* sprit);
+  void UseSprite();
 
   void SetMatrix4(const char* UniformName, glm::mat4 UniformData);
 

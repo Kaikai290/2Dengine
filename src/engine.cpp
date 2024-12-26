@@ -14,25 +14,26 @@ Engine::Engine() {
 void Engine::WindowInit() {
   Window = glfwCreateWindow(Width, Height, "Engine", NULL, NULL);
   glfwMakeContextCurrent(Window);
-
+if (Window == NULL)
+    {
+        std::cout << "Failed to create GLFW window" << std::endl;
+    }
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
     std::cout << "Failed to initialize GLAD" << std::endl;
   }
-  // CallbackFunction Input(*this);
-  // glfwSetWindowUserPointer(Window, &Input);
 }
 
-void Engine::RendererInit() { GameRenderer.RendererInit(); }
+void Engine::RendererInit() { 
+  GameRenderer.RendererInit();
+}
 
 void Engine::EntityInit() {
-  Entity Temp(&GameRenderer);
-
-  GameEntity = Temp;
+  GameEntity.ApplyRenderer(&GameRenderer);
+  GameEntity.LoadSprite("C:/Users/kaiwi/OneDrive/Desktop/Photos/char.jpg");
 }
 
 void Engine::WorldInit() {
-  World TempLevel(&GameRenderer, Width, Height);
-  Level = TempLevel;
+  Level.Init(&GameRenderer);
 }
 
 void Engine::Output(int Key) {
@@ -56,8 +57,10 @@ void Engine::RunEngine() {
 
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
+
     Level.RenderWorld();
     GameEntity.Render();
+
     glfwSwapBuffers(Window);
     glfwPollEvents();
   }

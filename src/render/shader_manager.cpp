@@ -5,6 +5,7 @@ ShaderManager::ShaderManager()
 
 }
 
+
 ShaderSource ShaderManager::LoadShadersFromFiles(std::string VertexShaderFilePath, std::string FragmentShaderFilePath){
   ShaderSource CurrentShader;
 

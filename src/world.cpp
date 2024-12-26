@@ -1,22 +1,25 @@
 #include "world.h"
 
 #include <fstream>
+#include <memory.h>
 
 World::World() {}
 
 World::World(Renderer *WorldRenderer, unsigned int Width, unsigned int Height)
     : Height(Height), Width(Width) {
-  for(int i =0; i < 1024; i++) {
-    LevelTiles[i].P_TileRenderer = WorldRenderer;
-  }
+}
+
+World::~World() {
+  free(LevelTiles);
+}
+void World::Init(Renderer *LevelRenderer) {
   LoadWorld("W:/2Dengine/res/level/world.lvl");
+  ApplyRendererToTiles(LevelRenderer);
   LoadSprites();
   BindSpritesToTiles();
 }
 
-World::~World() {}
-
-void World::LoadWorld(std::string FilePath) {
+void World::LoadWorld(const char *FilePath) {
   int i = 0;
   int XPos = 0;
   int YPos = 0;
@@ -24,11 +27,9 @@ void World::LoadWorld(std::string FilePath) {
   std::ifstream WorldLevel(FilePath);
   char c;
 
-  while(WorldLevel.get((char) c)) {
-    if(i > (sizeof(LevelTiles)/sizeof(*LevelTiles))) {
-       std::cout << "Level is greater then max tiles allowed" << std::endl;
-       return;
-    }
+  LevelTiles = (Tile *)malloc(sizeof(Tile) * 200);
+
+  while(WorldLevel.get(c)) {
     switch (c) {
       case '0':
         LevelTiles[i].Type = UNWALKABLE;
@@ -42,6 +43,7 @@ void World::LoadWorld(std::string FilePath) {
         LevelTiles[i].Type = WALKABLE;
         LevelTiles[i].WorldPosition.x = (float)XPos * TileSize;
         LevelTiles[i].WorldPosition.y = (float)YPos * TileSize;
+        LevelTiles[i].Size = glm::vec3(40.0f, 40.0f, 1.0f);
         LevelTiles[i].Initalized = true;
         i++;
         XPos++;
@@ -68,9 +70,14 @@ void World::LoadWorld(std::string FilePath) {
         break;
     }
   }
+  //LevelTiles = (Tile *)malloc(i * sizeof(Tile));
 }
 
-
+void World::ApplyRendererToTiles(Renderer *WorldRenderer) {
+  for(int i =0; i < 192; i++) {
+    LevelTiles[i].P_TileRenderer = WorldRenderer;
+  }
+}
 void World::RenderWorld() {
   for(int i =0; i < 1024; i++) {
     if(LevelTiles[i].Initalized == true){

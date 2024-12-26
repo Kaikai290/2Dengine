@@ -10,15 +10,18 @@ void RunEngine();
 
 int main(void)
 {
-  glfwInit();
+#ifdef DEBUG
+  std::cout << Debug << std::endl;
+#endif
+
+  glfwInit(); //Todo: Make sure to check if these are succesful!!!!
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); //Todo: Check what these flags do
 
 #ifdef __APPLE__
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
-
 
   /* Loop until the user closes the window */
   RunEngine();

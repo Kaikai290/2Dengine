@@ -8,7 +8,8 @@
 
 class World{
 public:
-  Tile LevelTiles[1024]; //May increase the number of tiles not sure what a good amount would be
+  Tile* LevelTiles; //Todo: Use malloc to allow flexible amount of game tiles
+  Tile oLevelTiles[1024];
   unsigned int Height;
   unsigned int Width;
   unsigned int TileSize = 40;
@@ -20,10 +21,13 @@ public:
   World(Renderer *WorldRenderer, unsigned int Height, unsigned int Width);
   ~World();
 
-  void LoadWorld(std::string FilePath);
+  void Init(Renderer *LevelRenderer);
+  void LoadWorld(const char* FilePath);
+  void ApplyRendererToTiles(Renderer *WorldRenderer);
   void RenderWorld();
   void LoadSprites();
   void BindSpritesToTiles();
 };
 
 #endif
+

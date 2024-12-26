@@ -3,10 +3,14 @@
 Entity::Entity()
 : Position(glm::vec3(0.0f)), Velocity(glm::vec3(0.0f)) {}
 
-Entity::Entity(Renderer* EntityRenderer)
-: EntityRenderer(EntityRenderer), Position(glm::vec3(0.0f)), Velocity(glm::vec3(0.0f)) {
-  Texture.LoadSprite("C:/Users/kaiwi/OneDrive/Desktop/Photos/Ktten.jpg");
+void Entity::LoadSprite(const char* FilePath){
+  EntityRenderer->LoadSprite(FilePath);
 }
+
+void Entity::ApplyRenderer(Renderer* Renderer){
+  EntityRenderer = Renderer;
+}
+
 
 void Entity::Render(){
   EntityRenderer->BindShader();
@@ -30,7 +34,8 @@ void Entity::Render(){
   EntityRenderer->SetMatrix4("View", view);
   EntityRenderer->SetMatrix4("Projection", projection);
   EntityRenderer->SetVector4("Colour", Colour);
-  Texture.UseSprite();
+  EntityRenderer->UseSprite();
+  EntityRenderer->UseSprite();
   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
   EntityRenderer->UnbindVAO();
