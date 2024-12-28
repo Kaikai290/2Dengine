@@ -1,7 +1,9 @@
 #ifndef WORLD_H
 #define WORLD_H
 
-#include<iostream>
+#include <iostream>
+#include <fstream>
+#include <memory.h>
 
 #include "render/sprite_manager.h"
 #include "tile.h"
@@ -9,7 +11,6 @@
 class World{
 public:
   Tile* LevelTiles; //Todo: Use malloc to allow flexible amount of game tiles
-  Tile oLevelTiles[1024];
   unsigned int Height;
   unsigned int Width;
   unsigned int TileSize = 40;
@@ -27,6 +28,7 @@ public:
   void RenderWorld();
   void LoadSprites();
   void BindSpritesToTiles();
+  bool ViableChar(char c);
 };
 
 #endif

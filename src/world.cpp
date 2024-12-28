@@ -1,9 +1,10 @@
 #include "world.h"
-
 #include <fstream>
-#include <memory.h>
 
-World::World() {}
+
+World::World() {
+  LevelTiles = (Tile *)malloc(sizeof(Tile));
+}
 
 World::World(Renderer *WorldRenderer, unsigned int Width, unsigned int Height)
     : Height(Height), Width(Width) {
@@ -23,11 +24,20 @@ void World::LoadWorld(const char *FilePath) {
   int i = 0;
   int XPos = 0;
   int YPos = 0;
-
-  std::ifstream WorldLevel(FilePath);
   char c;
+  Tile* tempLevel;
 
-  LevelTiles = (Tile *)malloc(sizeof(Tile) * 200);
+  std::ifstream CharCount(FilePath);
+  while(CharCount.get(c)) {
+    if ( ViableChar(c) ) {
+      i++;
+    }
+  }
+ 
+  std::ifstream WorldLevel(FilePath);
+  LevelTiles = (Tile *)malloc(sizeof(Tile) * (i - 1));
+
+  i = 0;
 
   while(WorldLevel.get(c)) {
     switch (c) {
@@ -70,6 +80,10 @@ void World::LoadWorld(const char *FilePath) {
         break;
     }
   }
+#ifdef DEBUG 
+  printf("World successfully loaded.\n");
+
+#endif // DEBUG
   //LevelTiles = (Tile *)malloc(i * sizeof(Tile));
 }
 
@@ -101,3 +115,16 @@ void World::BindSpritesToTiles() {
   }
 }
 
+bool World::ViableChar(char c) {
+    switch (c) {
+      case '0':
+        return true;
+      case '1': 
+        return true;
+      case '2':
+        return true;
+      case '3':
+        return true;
+    }
+    return false;
+}
