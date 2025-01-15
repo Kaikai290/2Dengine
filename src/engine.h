@@ -22,11 +22,12 @@ public:
   GLFWwindow* Window;
   unsigned int Height = 480;
   unsigned int Width = 640;
-  Renderer GameRenderer;
+  Renderer game_renderer;
   Memory test; 
-  Entity GameEntity;
   glm::mat4 model = glm::mat4(1.0f);
   World Level;
+
+  Entity game_entity;
 
 public:
   Engine();
@@ -39,6 +40,7 @@ private:
   void RendererInit();
   void EntityInit();
   void WorldInit();
+  void Render();
 };
 
 #endif

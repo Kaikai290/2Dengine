@@ -1,7 +1,14 @@
 #include "entity.h"
 
 Entity::Entity()
-: Position(glm::vec3(0.0f)), Velocity(glm::vec3(0.0f)) {}
+: Position(glm::vec3(0.0f)), Velocity(glm::vec3(0.0f)) {  
+  #if DEBUG 
+    std::cout << "Entity is unnamed" << std::endl;
+  #endif
+}
+
+Entity::Entity(std::string Name)
+: name(Name), Position(glm::vec3(0.0f)), Velocity(glm::vec3(0.0f)) {}
 
 void Entity::LoadSprite(const char* FilePath){
   EntityRenderer->LoadSprite(FilePath);
@@ -11,8 +18,15 @@ void Entity::ApplyRenderer(Renderer* Renderer){
   EntityRenderer = Renderer;
 }
 
+void Entity::InitCheck() {}
 
 void Entity::Render(){
+  #if DEBUG
+  if ( EntityRenderer == nullptr) { 
+    std::cout << "Failed to assign a RENDERER to " << name << "Entity" << std::endl;
+    return;}
+  #endif
+
   EntityRenderer->BindShader();
   EntityRenderer->BindVAO();
 

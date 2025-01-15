@@ -25,7 +25,6 @@ void World::LoadWorld(const char *FilePath) {
   int XPos = 0;
   int YPos = 0;
   char c;
-  Tile* tempLevel;
 
   std::ifstream CharCount(FilePath);
   while(CharCount.get(c)) {
@@ -33,6 +32,8 @@ void World::LoadWorld(const char *FilePath) {
       i++;
     }
   }
+  CharCount.close();
+
  
   std::ifstream WorldLevel(FilePath);
   LevelTiles = (Tile *)malloc(sizeof(Tile) * (i - 1));
@@ -80,11 +81,11 @@ void World::LoadWorld(const char *FilePath) {
         break;
     }
   }
+  WorldLevel.close();
 #ifdef DEBUG 
   printf("World successfully loaded.\n");
 
 #endif // DEBUG
-  //LevelTiles = (Tile *)malloc(i * sizeof(Tile));
 }
 
 void World::ApplyRendererToTiles(Renderer *WorldRenderer) {

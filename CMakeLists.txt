@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5.0)
+cmake_minimum_required(VERSION 3.13.0)
 
 project(2Dengine VERSION 0.1.0 LANGUAGES C CXX)
 
@@ -30,6 +30,8 @@ add_executable(2Dengine
 
                 src/callback_function.cpp
                 src/glad.c) 
+
+target_compile_definitions(2Dengine PUBLIC DEBUG=1)
 
 if(UNIX AND NOT APPLE)
   target_link_libraries(2Dengine OpenGL::GL glfw)
