@@ -18,7 +18,7 @@ void Entity::ApplyRenderer(Renderer* Renderer){
   EntityRenderer = Renderer;
 }
 
-void Entity::InitCheck()
+void Entity::InitCheck() {}
 
 void Entity::Render(){
   #if DEBUG
