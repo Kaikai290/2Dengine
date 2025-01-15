@@ -11,7 +11,7 @@ void RunEngine();
 int main(void)
 {
 #ifdef DEBUG
-  std::cout << Debug << std::endl;
+  std::cout << "Debug mode" << std::endl;
 #endif
 
   glfwInit(); //Todo: Make sure to check if these are succesful!!!!
@@ -23,7 +23,6 @@ int main(void)
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
-  /* Loop until the user closes the window */
   RunEngine();
 
   glfwTerminate();
@@ -32,10 +31,10 @@ int main(void)
 
 void RunEngine(){
 
-  Engine cEngine;   
-  glViewport(0, 0, cEngine.Width, cEngine.Height);
+  Engine Engine;   
+  glViewport(0, 0, Engine.Width, Engine.Height);
 
-  CallbackFunction Input(cEngine);
-  glfwSetWindowUserPointer(cEngine.Window, &Input);
-  cEngine.RunEngine();
+  CallbackFunction Input(Engine);
+  glfwSetWindowUserPointer(Engine.Window, &Input);
+  Engine.RunEngine();
 }
